@@ -11,17 +11,23 @@ var cors = require('cors');
 app.use(cors({optionsSuccessStatus: 200}));  // some legacy browsers choke on 204
 
 
-app.get("/api/:date", function(req, res) 
+app.get("/api/:date?", function(req, res) 
 {
   let unix;
   let utc;
+  let today;
   var dateString = req.params.date;
+  if(dateString===undefined){
+    console.log("here");
+    today =new Date().toLocaleDateString("en-US"); 
+    dateString=today;
+}
+  console.log(dateString);
   var dt = new Date(dateString);
   //if there is a remainder, then its an integer. Which means it is a unix number able to convert to utc.
   if((dateString%1)==0){
     utc=(new Date(parseInt(dateString,10))).toUTCString();
-    console.log(utc);
-    unix=dateString;
+    unix=parseInt(dateString,10);
   }else{
     utc=dt.toUTCString();
     unix=(new Date(dateString).valueOf());
