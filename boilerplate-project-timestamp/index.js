@@ -18,7 +18,6 @@ app.get("/api/:date?", function(req, res)
   let today;
   var dateString = req.params.date;
   if(dateString===undefined){
-    console.log("here");
     today =Date.now();
     dateString=today;
 }
