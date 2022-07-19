@@ -19,7 +19,7 @@ app.get("/api/:date?", function(req, res)
   var dateString = req.params.date;
   if(dateString===undefined){
     console.log("here");
-    today =new Date().toLocaleDateString("en-US"); 
+    today =Date.now();
     dateString=today;
 }
   console.log(dateString);
